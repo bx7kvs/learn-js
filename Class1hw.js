@@ -20,11 +20,6 @@ function Tags() {
         }
 
     }
-    this.tryFunk = () => {
-        return selTags;
-    }
-
-
     this.getSelectedTag = () => {
         if (selTags.length === 0) {
             return "Должен быть хотя бы 1 тэг";
@@ -36,8 +31,24 @@ function Tags() {
     if (tags.length === 0) {
         console.log("Должен быть хотя бы 1 тэг");
     }
+}
 
+function Category() {
+    const category = [
+        {id: 1, name: "Cat1", description: "11111"},
+        {id: 2, name: "Cat2", description: "22222"},
+        {id: 3, name: "Cat3", description: "33333"}
+    ]
+    this.addCategory = ({id, name, description}) => {
+        category.push({id, name, description});
+    }
+    this.getAllowedCat = () => [...category];
 
+    this.deleteCategory = (id) => {
+        if (category.find(category => category.id === id)) {
+            category.splice(id - 1, 1);
+        } else (console.error("несуществующий id"))
+    }
 }
 
 function Article(name, shortText, longText, author, date) {
@@ -55,15 +66,20 @@ function Web() {
 
 }
 
-const tags = new Tags();
-tags.addTag("firstTag");
-tags.selectTag('firstTag');
-tags.addTag("rer2");
-tags.selectTag('rer2');
-console.log("Выбранные тэги:" + tags.getSelectedTag());
+const category = new Category();
+category.addCategory({id: 4, name: "Cat4", description: "44444"},);
+category.deleteCategory(4)
+console.log(category.getAllowedCat());
 
-
-const myNewWeb = new Web();
-let firstArticle = new Article('My favorite website', 'someshorttext', 'somelongtext', 'Arthur', '23.02');
-console.log(firstArticle);
+// const tags = new Tags();
+// tags.addTag("firstTag");
+// tags.selectTag('firstTag');
+// tags.addTag("rer2");
+// tags.selectTag('rer2');
+// console.log("Выбранные тэги:" + tags.getSelectedTag());
+//
+//
+// const myNewWeb = new Web();
+// let firstArticle = new Article('My favorite website', 'someshorttext', 'somelongtext', 'Arthur', '23.02');
+// console.log(firstArticle);
 
