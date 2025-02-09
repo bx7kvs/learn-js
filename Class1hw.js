@@ -13,8 +13,6 @@ function Tags() {
         if (tags.includes(selTag)) {
             selTags.push(selTag);
             console.log("Выбран тэг:", selTag);
-
-
         } else {
             console.error(`Тэга не существует`);
         }
@@ -46,9 +44,19 @@ function Category() {
 
     this.deleteCategory = (id) => {
         if (category.find(category => category.id === id)) {
-            category.splice(id - 1, 1);
+            category.splice(id - 1, 1)
+            console.log(category);
         } else (console.error("несуществующий id"))
     }
+    this.selectCat = (selCatId) => {
+        if (category.find(category => category.id === selCatId)) {
+            this.SelectedCat = category.find(category => category.id === selCatId);
+            console.log("Выбрана категория:", this.SelectedCat);
+        } else {
+            console.error(`Категории не существует`);
+        }
+    }
+    this.getSelectedCat = () => {return this.SelectedCat}
 }
 
 function Article(name, shortText, longText, author, date) {
@@ -58,6 +66,7 @@ function Article(name, shortText, longText, author, date) {
     this.author = author;
     this.date = date;
     this.tags = tags.getSelectedTag();
+    this.category = category.getSelectedCat();
 
 }
 
@@ -68,18 +77,22 @@ function Web() {
 
 const category = new Category();
 category.addCategory({id: 4, name: "Cat4", description: "44444"},);
-category.deleteCategory(4)
 console.log(category.getAllowedCat());
+category.deleteCategory(2)
+category.selectCat(3)
+console.log(category.getAllowedCat());
+console.log(category.getSelectedCat());
+category.selectCat(4)
+console.log(category.getSelectedCat());
 
-// const tags = new Tags();
-// tags.addTag("firstTag");
-// tags.selectTag('firstTag');
-// tags.addTag("rer2");
-// tags.selectTag('rer2');
-// console.log("Выбранные тэги:" + tags.getSelectedTag());
-//
-//
-// const myNewWeb = new Web();
-// let firstArticle = new Article('My favorite website', 'someshorttext', 'somelongtext', 'Arthur', '23.02');
-// console.log(firstArticle);
+ const tags = new Tags();
+ tags.addTag("firstTag");
+ tags.selectTag('firstTag');
+ tags.addTag("rer2");
+ tags.selectTag('rer2');
+console.log("Выбранные тэги:" + tags.getSelectedTag());
+
+const myNewWeb = new Web();
+let firstArticle = new Article('My favorite website', 'someshorttext', 'somelongtext', 'Arthur', '23.02');
+console.log(firstArticle);
 
